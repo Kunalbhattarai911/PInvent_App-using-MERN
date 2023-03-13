@@ -57,6 +57,17 @@ const getProducts = asyncHandler(async (req, res) => {
   res.status(200).json(products);
 });
 
+// // //Get all product of every user
+const getAllProduct = asyncHandler(async (req, res) => {
+  try {
+    const product = await Product.find();
+    return res.status(200) .json(product)
+  } catch (error) {
+    console.error(err);
+    res.status(500).send('Internal server error');
+  }
+})
+
 // Get single product
 const getProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
@@ -154,6 +165,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 module.exports = {
   createProduct,
   getProducts,
+  getAllProduct,
   getProduct,
   deleteProduct,
   updateProduct,
